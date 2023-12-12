@@ -1,0 +1,59 @@
+.article-container {
+    margin-right: 15%;
+    margin-left: 15%;
+    background-color: white;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .article-id {
+    font-size: 1.2em;
+    color: #555;
+  }
+  
+  .article-title {
+    font-size: 2em;
+    margin-top: 10px;
+  }
+  
+  .article-content {
+    color: #333;
+  }
+  
+  .article-image {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+  
+  .article-details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .article-author {
+    font-weight: bold;
+  }
+  
+  .article-date {
+    color: #777;
+  }
+  .comment-container {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #ddd; /* Optional: Add border for separation */
+    padding: 10px; /* Optional: Add padding for spacing */
+  }
+  
+  .comment-text {
+    flex: 1; /* Takes as much space as possible */
+  }
+  
+  .comment-author {
+    flex-shrink: 0; /* Do not shrink this element */
+  }
+    

@@ -1,11 +1,19 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState,useEffect } from 'react';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
+  // Retrieve token from localStorage on component mount
+useEffect(() => {
+  const storedToken = localStorage.getItem('token');
+  if (storedToken) {
+    setToken(storedToken);
+  }
+}, [])
 
   const login = (token) => {
+    localStorage.setItem('token', token);
     setToken(token);
   };
 
