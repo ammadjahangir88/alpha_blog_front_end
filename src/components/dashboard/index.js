@@ -7,7 +7,8 @@ import './Style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import CreateArticle from '../article/CreateArticle';
-
+import MyDialog from '../../shared/Modal';
+ 
 export default function Dashboard() {
   const [articles, setArticles] = useState([]);
   const { token } = useAuth();
@@ -46,6 +47,7 @@ export default function Dashboard() {
 
   return (
     <div>
+      
       <div className='articles-outline'>
         <div className='articles-container'>
           {articles && articles.map((article, index) => (
@@ -66,15 +68,20 @@ export default function Dashboard() {
       </div>
       <aside>
         <div className="sidebar-menu">
-          <div className="menuBtn">
-            <Link to="/create-article" className="btn btn-io">
+          <div className="menuBtn" onClick={() => setIsModalOpen(true)}>
             <FontAwesomeIcon icon={faPlus} />
-            </Link>
           </div>
         </div>
       </aside>
-       {/* Render your modal component conditionally based on state */}
-       {isModalOpen && <CreateArticle onClose={closeModal} />}
+
+      {/* Render your modal component conditionally based on state */}
+      {isModalOpen && (
+        <CreateArticle
+          setIsModalOpen={setIsModalOpen}
+          // Add any other props you may need to pass to CreateArticle
+        />
+      )}
+     
     </div>
   );
 }
