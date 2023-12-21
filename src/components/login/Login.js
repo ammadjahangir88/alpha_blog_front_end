@@ -20,6 +20,8 @@ export default function Login() {
       email: email,
       password: password
     };
+    console.log(`${process.env.REACT_APP_API_URL}`)
+    debugger
     axios.post(`${process.env.REACT_APP_API_URL}/sign-in`, userData).then((response) => {
       console.log(response.status, response.data.token);
       console.log(response.data)

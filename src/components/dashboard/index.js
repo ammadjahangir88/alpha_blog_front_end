@@ -31,7 +31,7 @@ export default function Dashboard() {
     }
   };
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/sign-in`, {
+    axios.get(`${process.env.REACT_APP_API_URL}/articles`, {
       headers: {
         Authorization: `JWT ${token}`
       }
@@ -54,7 +54,7 @@ export default function Dashboard() {
             <Link to={`/article/${article._id}`} key={article._id} className='article-card'>
               <h1>{article.title}</h1>
               <p>{truncateText(article.content, 100)}</p>
-              <img src={`http://localhost:8000/uploads/008f37add430450ba8cc9ef1a149e29a`} alt="React Image" />
+              <img src={`${process.env.REACT_APP_API_URL}/uploads/008f37add430450ba8cc9ef1a149e29a`} alt="React Image" />
               <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                 <b>{article.author}</b>
                 <small>{article.createdAt
