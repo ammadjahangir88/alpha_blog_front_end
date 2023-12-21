@@ -1,32 +1,48 @@
-import logo from './logo.svg';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { lazy, Suspense } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
-import Login from './components/login/Login';
-import Dashboard from './components/dashboard';
 import { useAuth } from './components/Auth/AuthContext';
-import Navbar from './components/navbar/Navbar';
-import Article from './components/article/Article';
+
+// Lazy loading components
+const Login = lazy(() => import('./components/login/Login'));
+const Dashboard = lazy(() => import('./components/dashboard'));
+const Navbar = lazy(() => import('./components/navbar/Navbar'));
+const Article = lazy(() => import('./components/article/Article'));
+
+// Higher-order component for protected routes
+const ProtectedRoute = ({ token, children }) => {
+  return token ? children : <Navigate to="/" />;
+};
 
 function App() {
-  const { token } = useAuth(); // Get the token from the AuthContext
+  const { token } = useAuth();
+  console.log("Token is ",token)
   return (
     <BrowserRouter>
-    {
-      token && (
-        <>
-        <Navbar />
-        </>
-      )
-    }
-    
-      <Routes>
-        <Route path='/' element={<Login />}/>
-        <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/article/:id' element={<Article />} />
-      </Routes>
+      <Suspense fallback={<div>Loading...</div>}>
+        {token && <Navbar />}
 
+        <Routes>
+          {
+            !token ? (
+              <>
+              <Route path='/' element={<Login />} />
+              <Route path='*' element={<Navigate to="/" />} />
+
+              </>
+            ):(
+              <>
+              <Route path='*' element={<ProtectedRoute token={token}><Dashboard /></ProtectedRoute>} />
+              <Route path='/dashboard' element={<ProtectedRoute token={token}><Dashboard /></ProtectedRoute>} />
+              <Route path='/article/:id' element={<ProtectedRoute token={token}><Article /></ProtectedRoute>} />
+              </>
+            )
+          }
+       
+         
+        </Routes>
+      </Suspense>
     </BrowserRouter>
-
   );
 }
 

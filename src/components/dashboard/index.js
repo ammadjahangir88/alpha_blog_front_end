@@ -31,7 +31,7 @@ export default function Dashboard() {
     }
   };
   useEffect(() => {
-    axios.get('http://localhost:8000/articles', {
+    axios.get(`${process.env.REACT_APP_API_URL}/sign-in`, {
       headers: {
         Authorization: `JWT ${token}`
       }

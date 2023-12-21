@@ -18,7 +18,9 @@ useEffect(() => {
   };
 
   const logout = () => {
+    console.log("Logging out");
     setToken(null);
+    localStorage.removeItem('token');
   };
 
   return (
