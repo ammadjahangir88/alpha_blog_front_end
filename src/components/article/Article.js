@@ -13,7 +13,7 @@ export default function Article() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/article/${id}`, {
+      .get(`${process.env.REACT_APP_API_URL}/article/${id}`, {
         headers: {
           Authorization: `JWT ${token}`,
         },
@@ -27,7 +27,7 @@ export default function Article() {
       });
 
     axios
-      .get(`http://localhost:8000/comments/${id}`, {
+      .get(`${process.env.REACT_APP_API_URL}/comments/${id}`, {
         headers: {
           Authorization: `JWT ${token}`,
         },
@@ -45,7 +45,7 @@ export default function Article() {
     event.preventDefault();
   
     axios.post(
-      "http://localhost:8000/create-comment",
+      `${process.env.REACT_APP_API_URL}/create-comment`,
       { text: comment, article: id },
       {
         headers: {
@@ -57,7 +57,7 @@ export default function Article() {
         console.log('Comment submitted:', comment);
         setComment('');
         axios
-        .get(`http://localhost:8000/comments/${id}`, {
+        .get(`${process.env.REACT_APP_API_URL}/comments/${id}`, {
           headers: {
             Authorization: `JWT ${token}`,
           },
@@ -87,7 +87,7 @@ export default function Article() {
       <p className='article-content'>{article.content}</p>
       <img
         className='article-image'
-        src={`http://localhost:8000/uploads/008f37add430450ba8cc9ef1a149e29a`}
+        src={`${process.env.REACT_APP_API_URL}/uploads/008f37add430450ba8cc9ef1a149e29a`}
         alt='Article'
       />
       <div className='article-details'>
