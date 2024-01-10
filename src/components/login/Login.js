@@ -3,8 +3,10 @@ import './Login.css';
 import { Link } from 'react-router-dom'
 
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+
 import { useAuth } from '../Auth/AuthContext';
+import axiosInstance from '../../axios/Axios';
+
 export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -22,7 +24,8 @@ export default function Login() {
     };
     console.log(`${process.env.REACT_APP_API_URL}`)
     debugger
-    axios.post(`${process.env.REACT_APP_API_URL}/sign-in`, userData).then((response) => {
+    
+    axiosInstance.post('/sign-in', userData).then((response) => {
       console.log(response.status, response.data.token);
       console.log(response.data)
       if (response.data.success)

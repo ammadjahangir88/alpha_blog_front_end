@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './CreateArticle.css';
 import axios from 'axios';
 import { useAuth } from '../Auth/AuthContext';
-
+import axiosInstance from '../../axios/Axios'
 const CreateArticle = ({ setIsModalOpen }) => {
   const [formData, setFormData] = useState({
     title: '',
@@ -25,11 +25,7 @@ const CreateArticle = ({ setIsModalOpen }) => {
     e.preventDefault();
     try {
         // Make a POST request to the specified endpoint
-        const response = await axios.post(`${process.env.REACT_APP_API_URL}/create-post`, formData,  {
-            headers: {
-              Authorization: `JWT ${token}`,
-            },
-          });
+        const response = await axiosInstance.post(`/create-post`, formData);
   
         // Handle the response as needed (e.g., show a success message)
         console.log('Server Response:', response.data);

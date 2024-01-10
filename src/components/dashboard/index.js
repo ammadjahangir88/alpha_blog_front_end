@@ -8,7 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import CreateArticle from '../article/CreateArticle';
 import MyDialog from '../../shared/Modal';
- 
+import axiosInstance from '../../axios/Axios';
+
 export default function Dashboard() {
   const [articles, setArticles] = useState([]);
   const { token } = useAuth();
@@ -31,11 +32,7 @@ export default function Dashboard() {
     }
   };
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/articles`, {
-      headers: {
-        Authorization: `JWT ${token}`
-      }
-    }).then(response => {
+    axiosInstance.get(`/articles`).then(response => {
       console.log(response.data);
       setArticles(response.data.articles);
     }).catch(error => {
