@@ -48,7 +48,7 @@ export default function Login() {
       <div className='login-image'></div>
       <div className="login-form">
         <form>
-          <h1 className="login text-5xl">Sneat</h1>
+          <h1 className="login text-5xl">Alpha</h1>
           <span style={{ fontWeight: 300, fontSize: '30px' }}>Welcome to Sneat! 👋</span>
           <p style={{ fontWeight: 400, fontSize: '15px', marginBottom: '1rem' }}>Please sign-in to continue and start the adventure</p>
           {
